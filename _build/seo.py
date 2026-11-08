@@ -3,7 +3,7 @@ import os, re, json, shutil, html as H
 from bs4 import BeautifulSoup
 SRC = "/home/claude/daraj_web/site"
 OUT = "/home/claude/daraj_web/final"
-DOMAIN = "https://YOUR-DOMAIN.com"
+DOMAIN = "https://daraj-website.mohamed-elsayeed82.workers.dev"
 shutil.rmtree(OUT, ignore_errors=True); os.makedirs(OUT + "/ar")
 
 exec(open("/home/claude/daraj_web/articles_data.py", encoding="utf-8").read())

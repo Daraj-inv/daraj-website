@@ -7,4 +7,6 @@ Bilingual (English / Arabic) static website for Daraj · *Take the next step.*
 - `images/` article covers
 - `_build/` the scripts that generate the site (build.py → seo.py → rebrand.py)
 
-Before going live: replace `YOUR-DOMAIN.com`, `[email]`, `[WhatsApp]`, `[address]`, and connect the forms.
+Live (free address): https://daraj-website.mohamed-elsayeed82.workers.dev
+
+Still to fill in: `[email]`, `[WhatsApp]`, `[address]`, and connect the forms.

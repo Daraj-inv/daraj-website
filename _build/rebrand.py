@@ -40,7 +40,7 @@ for d, pre in [(OUT, ""), (f"{OUT}/ar", "../")]:
         h = re.sub(r'<link rel="icon"[^>]*>', "", h)
         h = h.replace("</head>", head + "\n</head>", 1)
         img = f"images/{slugs[f]}.jpg" if f in slugs else "daraj-share-image-1200x630.png"
-        h = re.sub(r'(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*(")', lambda m: m.group(1) + "https://YOUR-DOMAIN.com/" + img + m.group(2), h)
+        h = re.sub(r'(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*(")', lambda m: m.group(1) + "https://daraj-website.mohamed-elsayeed82.workers.dev/" + img + m.group(2), h)
         if "og:image:width" not in h and img.endswith(".png"):
             h = h.replace('<meta property="og:image"', '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image"', 1)
         if pre:  # Arabic pages: the logo slogan is English, so add it in Arabic too
