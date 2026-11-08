@@ -37,9 +37,30 @@ document.querySelectorAll('a[href]').forEach(a => a.addEventListener("click", ()
   if (u.pathname !== location.pathname && !u.hash) { try { window.parent && window.parent !== window && window.parent.scrollTo(0, 0); } catch (e) {} }
 }));
 document.querySelectorAll("select").forEach(s => { if (s.options.length) s.options[0].value = ""; });
-// Forms: connect to Google Sheets / CRM when the site goes live
+// Forms. W3F_KEY: Web3Forms access key (requests go to Daraj's private inbox; the key does not reveal the email).
+// Until the key is added, a submitted form opens WhatsApp with the request filled in. CAL_URL: Calendly booking link.
+const WA = "201002701704", W3F_KEY = "", CAL_URL = "";
 const bf = document.getElementById("bookForm");
-if (bf) bf.addEventListener("submit", e => { e.preventDefault(); bf.hidden = true; document.getElementById("thanks").hidden = false; });
+if (bf) bf.addEventListener("submit", e => {
+  e.preventDefault();
+  const ar = document.documentElement.dir === "rtl", data = {}, lines = [];
+  bf.querySelectorAll("label").forEach(l => {
+    const f = l.querySelector("input,select,textarea"); if (!f || f.type === "checkbox") return;
+    const lab = ((l.querySelector("span") || {}).textContent || f.name).trim();
+    const v = f.tagName === "SELECT" ? f.options[f.selectedIndex].text : f.value.trim();
+    if (v) { data[lab] = v; lines.push(lab + ": " + v); }
+  });
+  if (W3F_KEY) {
+    fetch("https://api.web3forms.com/submit", {method: "POST", headers: {"Content-Type": "application/json", Accept: "application/json"},
+      body: JSON.stringify(Object.assign({access_key: W3F_KEY, subject: "New Daraj request: " + document.title, from_name: "Daraj website", page: location.href}, data))}).catch(() => {});
+  } else {
+    const NL = String.fromCharCode(10);
+    window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent((ar ? "طلب جديد من موقع درج" : "New request from the Daraj website") + NL + document.title + NL + NL + lines.join(NL)), "_blank");
+  }
+  bf.hidden = true; const th = document.getElementById("thanks"); th.hidden = false;
+  if (CAL_URL) { const a = document.createElement("a"); a.className = "btn btn-gold"; a.href = CAL_URL; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = ar ? "اختر موعد مكالمتك الآن ←" : "Pick a time for your call now →"; a.style.marginTop = "18px"; th.appendChild(a); }
+});
 </script>"""
 
 pages = {}

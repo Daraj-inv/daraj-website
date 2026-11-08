@@ -1,5 +1,8 @@
 # Apply the Daraj Brand Kit v1 to the built site in final/ (run after seo.py)
 import os, re, shutil, json
+from urllib.parse import quote
+DOMAIN = "https://daraj-website.mohamed-elsayeed82.workers.dev"
+WA_LINK = "https://wa.me/201002701704"
 KIT = "/home/claude/brandkit_in/Daraj-Brand-Kit"; OUT = "final"
 os.makedirs(f"{OUT}/brand", exist_ok=True)
 for f in ["daraj-logo-horizontal-white-no-slogan.svg", "daraj-logo-horizontal-white.svg", "daraj-icon-white.svg"]:
@@ -43,6 +46,18 @@ for d, pre in [(OUT, ""), (f"{OUT}/ar", "../")]:
         h = re.sub(r'(<meta (?:property="og:image"|name="twitter:image") content=")[^"]*(")', lambda m: m.group(1) + "https://daraj-website.mohamed-elsayeed82.workers.dev/" + img + m.group(2), h)
         if "og:image:width" not in h and img.endswith(".png"):
             h = h.replace('<meta property="og:image"', '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image"', 1)
+        # WhatsApp: every chat button and the floating button open a chat with Daraj
+        def wa_fix(m):
+            tag = re.sub(r'href="[^"]*"', 'href="' + WA_LINK + '"', m.group(1))
+            return tag.replace("<a ", '<a target="_blank" rel="noopener" ', 1) + m.group(2)
+        h = re.sub(r'(<a\b[^>]*>)((?:Chat on WhatsApp|تواصل عبر واتساب)</a>)', wa_fix, h)
+        h = re.sub(r'(<a\b[^>]*class="wa"[^>]*>)()', wa_fix, h)
+        # article share buttons
+        url = DOMAIN + "/" + ("ar/" if pre else "") + ("" if f == "index.html" else f)
+        h = re.sub(r'(<a\b[^>]*)href="#"([^>]*>)WhatsApp</a>', lambda m: m.group(1) + 'href="https://wa.me/?text=' + quote(url) + '" target="_blank" rel="noopener"' + m.group(2) + "WhatsApp</a>", h)
+        h = re.sub(r'(<a\b[^>]*)href="#"([^>]*>)LinkedIn</a>', lambda m: m.group(1) + 'href="https://www.linkedin.com/sharing/share-offsite/?url=' + quote(url, safe="") + '" target="_blank" rel="noopener"' + m.group(2) + "LinkedIn</a>", h)
+        # footer contact: WhatsApp only (email and address stay private)
+        h = re.sub(r'<span>\[email\]</span>\s*<span>\[WhatsApp\]</span>\s*<span>\[address\]</span>', '<a href="' + WA_LINK + '" target="_blank" rel="noopener" style="color:#fff;font-weight:600" dir="ltr">WhatsApp · +20 100 270 1704</a>', h)
         if pre:  # Arabic pages: the logo slogan is English, so add it in Arabic too
             h = re.sub(r'(<footer>.*?</nav>)', lambda m: m.group(1) + '<p class="slog">اتخذ الخطوة التالية.</p>', h, count=1, flags=re.S)
         h = h.replace("</style>", CSS + "</style>", 1)

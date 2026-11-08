@@ -557,10 +557,10 @@ h1,h2,h3,h4{font-family:Montserrat,"IBM Plex Sans Arabic",sans-serif;font-weight
 </div></section>
 <footer><div class="wrap">
 <div class="fgrid2"><a class="logo" href="index.html"><img src="../brand/daraj-logo-horizontal-white.svg" alt="Daraj — Take the next step" width="210" height="56"></a>
-<div style="display:flex;gap:28px;flex-wrap:wrap"><span>[email]</span><span>[WhatsApp]</span><span>[address]</span></div></div><nav aria-label="Footer" style="display:flex;flex-wrap:wrap;gap:12px 26px;margin:22px 0 6px"><a data-i18n="ft0" href="daraj-invest.html" style="color:#C9D2DE">درج للاستثمار</a><a data-i18n="ft1" href="daraj-business.html" style="color:#C9D2DE">درج للأعمال</a><a data-i18n="ft2" href="daraj-capital.html" style="color:#C9D2DE">كابيتال</a><a data-i18n="ft3" href="daraj-investors-club.html" style="color:#C9D2DE">نادي المستثمرين</a><a data-i18n="ft4" href="daraj-safqa.html" style="color:#C9D2DE">صفقة</a><a data-i18n="ft5" href="daraj-bedaya.html" style="color:#C9D2DE">بداية</a><a data-i18n="ft6" href="daraj-consulting.html" style="color:#C9D2DE">الاستشارات</a><a data-i18n="ft7" href="daraj-departments.html" style="color:#C9D2DE">الإدارات</a><a data-i18n="ft8" href="daraj-private-advisory.html" style="color:#C9D2DE">الاستشارات الخاصة</a><a data-i18n="ft9" href="articles.html" style="color:#C9D2DE">المقالات</a></nav><p class="slog">اتخذ الخطوة التالية.</p>
+<div style="display:flex;gap:28px;flex-wrap:wrap"><a href="https://wa.me/201002701704" target="_blank" rel="noopener" style="color:#fff;font-weight:600" dir="ltr">WhatsApp · +20 100 270 1704</a></div></div><nav aria-label="Footer" style="display:flex;flex-wrap:wrap;gap:12px 26px;margin:22px 0 6px"><a data-i18n="ft0" href="daraj-invest.html" style="color:#C9D2DE">درج للاستثمار</a><a data-i18n="ft1" href="daraj-business.html" style="color:#C9D2DE">درج للأعمال</a><a data-i18n="ft2" href="daraj-capital.html" style="color:#C9D2DE">كابيتال</a><a data-i18n="ft3" href="daraj-investors-club.html" style="color:#C9D2DE">نادي المستثمرين</a><a data-i18n="ft4" href="daraj-safqa.html" style="color:#C9D2DE">صفقة</a><a data-i18n="ft5" href="daraj-bedaya.html" style="color:#C9D2DE">بداية</a><a data-i18n="ft6" href="daraj-consulting.html" style="color:#C9D2DE">الاستشارات</a><a data-i18n="ft7" href="daraj-departments.html" style="color:#C9D2DE">الإدارات</a><a data-i18n="ft8" href="daraj-private-advisory.html" style="color:#C9D2DE">الاستشارات الخاصة</a><a data-i18n="ft9" href="articles.html" style="color:#C9D2DE">المقالات</a></nav><p class="slog">اتخذ الخطوة التالية.</p>
 <p class="disc" data-i18n="disc">درج شركة تعارف واستشارات. لا تحتفظ بالأموال أو تديرها، ولا تضمن أي بيع أو مشترٍ أو سعر.</p>
 </div></footer>
-<a aria-label="Chat with us on WhatsApp" class="wa" href="#start"><svg aria-hidden="true" fill="none" height="30" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="30"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.4-4.3a8.5 8.5 0 1 1 15.6-4.5z"></path></svg></a>
+<a target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp" class="wa" href="https://wa.me/201002701704"><svg aria-hidden="true" fill="none" height="30" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="30"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.4-4.3a8.5 8.5 0 1 1 15.6-4.5z"></path></svg></a>
 <script>
 // Every new page opens at the top (unless the link points to a section)
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
@@ -574,9 +574,30 @@ document.querySelectorAll('a[href]').forEach(a => a.addEventListener("click", ()
   if (u.pathname !== location.pathname && !u.hash) { try { window.parent && window.parent !== window && window.parent.scrollTo(0, 0); } catch (e) {} }
 }));
 document.querySelectorAll("select").forEach(s => { if (s.options.length) s.options[0].value = ""; });
-// Forms: connect to Google Sheets / CRM when the site goes live
+// Forms. W3F_KEY: Web3Forms access key (requests go to Daraj's private inbox; the key does not reveal the email).
+// Until the key is added, a submitted form opens WhatsApp with the request filled in. CAL_URL: Calendly booking link.
+const WA = "201002701704", W3F_KEY = "", CAL_URL = "";
 const bf = document.getElementById("bookForm");
-if (bf) bf.addEventListener("submit", e => { e.preventDefault(); bf.hidden = true; document.getElementById("thanks").hidden = false; });
+if (bf) bf.addEventListener("submit", e => {
+  e.preventDefault();
+  const ar = document.documentElement.dir === "rtl", data = {}, lines = [];
+  bf.querySelectorAll("label").forEach(l => {
+    const f = l.querySelector("input,select,textarea"); if (!f || f.type === "checkbox") return;
+    const lab = ((l.querySelector("span") || {}).textContent || f.name).trim();
+    const v = f.tagName === "SELECT" ? f.options[f.selectedIndex].text : f.value.trim();
+    if (v) { data[lab] = v; lines.push(lab + ": " + v); }
+  });
+  if (W3F_KEY) {
+    fetch("https://api.web3forms.com/submit", {method: "POST", headers: {"Content-Type": "application/json", Accept: "application/json"},
+      body: JSON.stringify(Object.assign({access_key: W3F_KEY, subject: "New Daraj request: " + document.title, from_name: "Daraj website", page: location.href}, data))}).catch(() => {});
+  } else {
+    const NL = String.fromCharCode(10);
+    window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent((ar ? "طلب جديد من موقع درج" : "New request from the Daraj website") + NL + document.title + NL + NL + lines.join(NL)), "_blank");
+  }
+  bf.hidden = true; const th = document.getElementById("thanks"); th.hidden = false;
+  if (CAL_URL) { const a = document.createElement("a"); a.className = "btn btn-gold"; a.href = CAL_URL; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = ar ? "اختر موعد مكالمتك الآن ←" : "Pick a time for your call now →"; a.style.marginTop = "18px"; th.appendChild(a); }
+});
 </script>
 </body>
 </html>
