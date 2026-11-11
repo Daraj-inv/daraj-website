@@ -18,6 +18,7 @@ h1,h2,h3,h4{font-family:Montserrat,"IBM Plex Sans Arabic",sans-serif;font-weight
 .logo img{display:block;height:30px;width:auto}footer .logo img{height:46px}
 .pathc .k{color:var(--goldd)}.pathc.g .k{color:var(--gold)}
 .btn-gold:hover{background:#DDBB6C}
+.slogan{display:flex;align-items:center;gap:14px;margin:18px 0 6px;color:var(--gold);font-weight:600;font-size:14px;letter-spacing:.32em;text-transform:uppercase}.slogan i{display:block;width:44px;height:2px;background:var(--gold)}[dir=rtl] .slogan{letter-spacing:0;font-size:18px}
 .slog{color:var(--gold);font-weight:600;font-size:16px;margin:14px 0 0}
 """
 FONT = "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"

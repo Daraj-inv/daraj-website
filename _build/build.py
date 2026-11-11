@@ -364,8 +364,9 @@ def art_cards(p, n=None, items=None):
 home = f'''<section class="hero" id="top"><div class="wrap">
  <div class="split">
   <div class="a">
-   {t("h_eb","Take the next step","اتخذ الخطوة التالية","div",'class="eyebrow" style="color:var(--gold)"')}
+   {t("h_eb","Capital · Business · Growth","رأس المال · الأعمال · النمو","div",'class="eyebrow" style="color:var(--gold)"')}
    {t("h_h1","Where capital<br>meets business.","حيث يلتقي المال<br>بالأعمال.","h1",'style="font-size:clamp(42px,6vw,72px);margin-top:14px"')}
+   <div class="slogan"><i></i>{t("h_sl","Take the next step","اتخذ الخطوة التالية","span")}</div>
    {t("h_lead","Step by step, we connect investors with real businesses and with each other, and help owners start, fix, grow or sell. One experienced team, open to every industry and every size.","خطوة بخطوة، نربط المستثمرين بمشاريع حقيقية وببعضهم بعضًا، ونساعد أصحاب الأعمال على البدء والإصلاح والنمو والبيع. فريق واحد من الخبراء، ومفتوح لكل القطاعات وكل الأحجام.","p",'class="lead"')}
    <div class="ctas">{t("h_c1","Book a free call","احجز مكالمة مجانية","a",'class="btn btn-gold" href="#start"')}{t("h_c2","Explore our services","اكتشف خدماتنا","a",'class="btn btn-line" href="#doors" style="color:#fff"')}</div>
    <div class="trust"><span>{CHECK}{t("h_t0","Free 60-minute call","مكالمة مجانية لمدة ٦٠ دقيقة")}</span><span>{CHECK}{t("h_t1","We never touch your money","لا نلمس أموالك أبدًا")}</span><span>{CHECK}{t("h_t2","Strictly confidential","سرية تامة")}</span></div>
@@ -413,7 +414,7 @@ home = f'''<section class="hero" id="top"><div class="wrap">
    ("Can you find investment opportunities in a specific country?","هل يمكنكم إيجاد فرص استثمار في دولة محددة؟","Yes. Tell us the country, sector and ticket size, and our Investors Club team researches the market and searches for you.","نعم. أخبرنا بالدولة والقطاع وحجم الاستثمار، وسيتولى فريق نادي المستثمرين دراسة السوق والبحث عن الفرص المناسبة لك."),
    ("Who is Daraj for?","لمن يقدم درج خدماته؟","Investors, owners, sellers and people ready to start, in any industry and at any size. The free call tells us which door fits you.","للمستثمرين وأصحاب الأعمال والبائعين ومن يستعد لبدء مشروعه، في أي قطاع وبأي حجم. والمكالمة المجانية تحدد الباب المناسب لك.")]))}
 </div></section>
-{contact_form("hm", ("Take the next step: one free call.","اتخذ الخطوة التالية: مكالمة مجانية واحدة."), ("Tell us where you are. A senior advisor will show you the next step.","حدّثنا عن وضعك الحالي، وسيوضح لك أحد كبار مستشارينا الخطوة التالية."), STD_STEPS, basic_fields("hm"), ("Book my free call →","احجز مكالمتي المجانية ←"), THX)}
+{contact_form("hm", ("Start with one free call.","ابدأ بمكالمة مجانية واحدة."), ("Tell us where you are. A senior advisor will show you the next step.","حدّثنا عن وضعك الحالي، وسيوضح لك أحد كبار مستشارينا الخطوة التالية."), STD_STEPS, basic_fields("hm"), ("Book my free call →","احجز مكالمتي المجانية ←"), THX)}
 '''
 build("index.html", "", "Daraj — Take the next step | Where capital meets business", "Daraj connects investors with real businesses and with each other, and helps owners start, fix, grow or sell. Start with a free call.", home)
 
