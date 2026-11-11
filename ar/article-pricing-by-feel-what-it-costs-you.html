@@ -454,7 +454,7 @@ footer .disc{border-top:1px solid #2D3F58;padding-top:20px;font-size:13px}
 body{font-family:Montserrat,"IBM Plex Sans Arabic",system-ui,sans-serif}
 h1,h2,h3,h4{font-family:Montserrat,"IBM Plex Sans Arabic",sans-serif;font-weight:600;letter-spacing:-.01em}
 [dir=rtl] body,[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4{font-family:"IBM Plex Sans Arabic",Montserrat,sans-serif;letter-spacing:0}
-.logo img{display:block;height:30px;width:auto}footer .logo img{height:46px}
+.logo img{display:block;height:30px;width:auto}@media(min-width:900px){.logo img.hdr{height:56px}}footer .logo img{height:46px}
 .pathc .k{color:var(--goldd)}.pathc.g .k{color:var(--gold)}
 .btn-gold:hover{background:#DDBB6C}
 .slogan{display:flex;align-items:center;gap:14px;margin:18px 0 6px;color:var(--gold);font-weight:600;font-size:14px;letter-spacing:.32em;text-transform:uppercase}.slogan i{display:block;width:44px;height:2px;background:var(--gold)}[dir=rtl] .slogan{letter-spacing:0;font-size:18px}
@@ -466,7 +466,7 @@ h1,h2,h3,h4{font-family:Montserrat,"IBM Plex Sans Arabic",sans-serif;font-weight
 <div class="topbar"><span data-i18n="tb_t">فترة التأسيس متاحة الآن، ويحظى العملاء الأوائل بأولوية الاهتمام من كبار خبرائنا.</span><a data-i18n="tb_a" href="#start">احجز مكالمتك المجانية</a></div>
 <header>
 <div class="wrap hbar">
-<a aria-label="Daraj home" class="logo" href="index.html"><img src="../brand/daraj-logo-horizontal-white-no-slogan.svg" alt="Daraj — Take the next step" width="182" height="36"></a>
+<a aria-label="Daraj home" class="logo" href="index.html"><picture><source media="(min-width: 900px)" srcset="../brand/daraj-logo-horizontal-white.svg"><img class="hdr" src="../brand/daraj-logo-horizontal-white-no-slogan.svg" alt="Daraj — Take the next step" width="182" height="36"></picture></a>
 <nav aria-label="Main" class="main">
 <a class="hide-m" data-i18n="nav_home" href="index.html">الرئيسية</a>
 <div class="dd"><button aria-haspopup="true" type="button"><span data-i18n="nav_services">الخدمات</span> ▾</button>

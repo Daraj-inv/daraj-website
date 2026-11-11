@@ -15,7 +15,7 @@ CSS = """
 body{font-family:Montserrat,"IBM Plex Sans Arabic",system-ui,sans-serif}
 h1,h2,h3,h4{font-family:Montserrat,"IBM Plex Sans Arabic",sans-serif;font-weight:600;letter-spacing:-.01em}
 [dir=rtl] body,[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] h4{font-family:"IBM Plex Sans Arabic",Montserrat,sans-serif;letter-spacing:0}
-.logo img{display:block;height:30px;width:auto}footer .logo img{height:46px}
+.logo img{display:block;height:30px;width:auto}@media(min-width:900px){.logo img.hdr{height:56px}}footer .logo img{height:46px}
 .pathc .k{color:var(--goldd)}.pathc.g .k{color:var(--gold)}
 .btn-gold:hover{background:#DDBB6C}
 .slogan{display:flex;align-items:center;gap:14px;margin:18px 0 6px;color:var(--gold);font-weight:600;font-size:14px;letter-spacing:.32em;text-transform:uppercase}.slogan i{display:block;width:44px;height:2px;background:var(--gold)}[dir=rtl] .slogan{letter-spacing:0;font-size:18px}
@@ -37,7 +37,11 @@ for d, pre in [(OUT, ""), (f"{OUT}/ar", "../")]:
         logos = list(re.finditer(r'(<a [^>]*class="logo"[^>]*>)\s*<svg.*?</svg>\s*<b>Daraj</b>.*?(</a>)', h, re.S))
         for i, m in reversed(list(enumerate(logos))):
             src = "daraj-logo-horizontal-white.svg" if i == len(logos) - 1 and len(logos) > 1 else "daraj-logo-horizontal-white-no-slogan.svg"
-            h = h[:m.start()] + m.group(1) + f'<img src="{pre}brand/{src}" alt="Daraj — Take the next step" width="{"182" if "no-slogan" in src else "210"}" height="{"36" if "no-slogan" in src else "56"}">' + m.group(2) + h[m.end():]
+            if "no-slogan" in src:  # header: full logo with slogan on wide screens, compact logo on phones
+                img = f'<picture><source media="(min-width: 900px)" srcset="{pre}brand/daraj-logo-horizontal-white.svg"><img class="hdr" src="{pre}brand/{src}" alt="Daraj — Take the next step" width="182" height="36"></picture>'
+            else:
+                img = f'<img src="{pre}brand/{src}" alt="Daraj — Take the next step" width="210" height="56">'
+            h = h[:m.start()] + m.group(1) + img + m.group(2) + h[m.end():]
         # head: favicons, manifest, theme colour, share image
         head = (f'<link rel="icon" href="{pre}favicon.ico" sizes="any"><link rel="icon" href="{pre}favicon.svg" type="image/svg+xml">'
                 f'<link rel="apple-touch-icon" href="{pre}apple-touch-icon-180x180.png"><link rel="manifest" href="{pre}site.webmanifest"><meta name="theme-color" content="#0E2342">')
