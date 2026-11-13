@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://daraj-website.mohamed-elsayeed82.workers.dev/sitemap.xml
+Sitemap: https://daraj.pages.dev/sitemap.xml
